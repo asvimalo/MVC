@@ -1,0 +1,28 @@
+﻿@model Kunskapkoll.Models.Person
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@{
+    var options = new AjaxOptions()
+    {
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "CreateAllAddresses"
+    };
+}
+@using (Ajax.BeginForm("Create", null, options, new { id = "FormCreateAddress"}))
+{
+    @Html.LabelFor(x => x.Name)
+    @Html.EditorFor(x => x.Name)
+    
+    <input type="submit" value="Add Address" id="AddAddress"/>
+}
+<div id="CreateAllAddresses">
+    @{ 
+        Html.RenderAction("List");
+    }     
+</div>
+

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Lab_1.Models.Photo>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <title>Index</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            @*<div class="">
+
+                <div>
+                    @Html.DisplayNameFor(model => model.Path)
+                </div>
+                <div>
+                    @Html.DisplayNameFor(model => model.Name)
+                </div>
+                <div>
+                    @Html.DisplayNameFor(model => model.Description)
+                </div>
+                <div>
+                    @Html.DisplayNameFor(model => model.UploadedDate)
+                </div>
+
+            </div>*@
+
+            @foreach (var item in Model)
+            {
+                <div class="thumbnail col-md-3">
+                    @{
+                        string _url = Path.GetFileName(item.Path);
+                        <img class="img-responsive" src="~/Images/@_url" />
+                    }
+
+                    <div>
+                        @Html.DisplayFor(modelItem => item.Path)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </div>
+                    <div>
+                        @Html.DisplayFor(modelItem => item.UploadedDate)
+                    </div>
+                    <div>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.PhotoID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.PhotoID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.PhotoID })
+                    </div>
+                </div>
+                        }
+
+        </div>
+    </div>
+</body>
+</html>
