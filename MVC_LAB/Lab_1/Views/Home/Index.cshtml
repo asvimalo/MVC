@@ -7,9 +7,17 @@
 
 <h2 class="text-center">Gallery</h2>
 
-<p>
-    <a class="btn btn-primary" href="@Url.Action("Upload", "Gallery")"><span>Upload</span></a>
-</p>
+@*<p>
+        @using (Html.BeginForm("Upload", "Gallery", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div>@Html.ValidationMessage("Error")</div>
+            <div>@Html.ValidationMessage("Error")</div>
+
+        }
+
+
+    </p>*@
+
 <div class="row">
 
     @foreach (var item in Model)
@@ -22,10 +30,7 @@
             }
             <div class="caption">
 
-
-                @Html.ActionLink("Edit", "Edit", new { id = item.PhotoID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.PhotoID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.PhotoID })
+                @*@Html.DisplayFor(modelItem => item.Name)*@
                 @*@Html.DisplayFor(modelItem => item.Description)
                     @Html.DisplayFor(modelItem => item.UploadedDate.Date)*@
 
@@ -35,10 +40,13 @@
 
 
         <div>
-
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.PhotoID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PhotoID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PhotoID })*@
         </div>
 
 
                 }
 </div>
+
 

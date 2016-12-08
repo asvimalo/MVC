@@ -13,6 +13,14 @@ namespace Lab_1
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.MapRoute(
+            //    name: "GalleryRoute",
+            //    url: "Gallery/{id}/{meta}",
+            //    defaults: new { Controller = "Gallery", action = "Show",
+            //        id = UrlParameter.Optional,
+            //        meta = UrlParameter.Optional }
+            //    );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

@@ -60,5 +60,13 @@ namespace Lab_1.EF
         {
             return GetEnumerator();
         }
+        public List<Photo> GetAll()
+        {
+            return listOfPhotos;
+        }
+        public void Add(Photo photo)
+        {
+            listOfPhotos.Add(photo);
+        }
     }
 }
