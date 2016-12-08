@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Lab_1.Models
 {
-    public class Photo
+    public class PhotoView
     {
         public Guid PhotoID { get; set; }
         public string Path { get; set; }

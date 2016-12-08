@@ -15,7 +15,7 @@ namespace LAB_DAL.Models
         public int ComID { get; set; }
         
         public string Comments { get; set; }
-        [Required]
+        
         public Guid PhotoID { get; set; }
         [ForeignKey("PhotoID")]
         public virtual Photo Photo { get; set; }

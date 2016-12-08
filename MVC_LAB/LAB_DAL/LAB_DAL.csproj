@@ -52,6 +52,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EF\GalleryEntities.cs" />
+    <Compile Include="Migrations\201612081900303_Create Photo.cs" />
+    <Compile Include="Migrations\201612081900303_Create Photo.Designer.cs">
+      <DependentUpon>201612081900303_Create Photo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Album.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Photo.cs" />
@@ -61,9 +66,15 @@
     <Compile Include="Repo\IRepo.cs" />
     <Compile Include="Repo\PhotoRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
-    <None Include="App.config" />
+    <EmbeddedResource Include="Migrations\201612081900303_Create Photo.resx">
+      <DependentUpon>201612081900303_Create Photo.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

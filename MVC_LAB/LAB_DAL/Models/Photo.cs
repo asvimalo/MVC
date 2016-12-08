@@ -22,14 +22,12 @@ namespace LAB_DAL.Models
         
         
         public DateTime UploadedDate { get; set; }
-        [Required]
-        public Guid Id { get; set; }
-        [ForeignKey("Id")]
-        public virtual Album Album { get; set; }
-        public virtual ICollection<Comment> Comments { get; set; }
+        
+        
+        
         public Photo()
         {
-            Comments = new HashSet<Comment>();
+            
             PhotoID = Guid.NewGuid();
         }
     }

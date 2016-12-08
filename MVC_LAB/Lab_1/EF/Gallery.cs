@@ -7,14 +7,14 @@ using Lab_1.Models;
 
 namespace Lab_1.EF
 {
-    public class Gallery : IEnumerable<Photo>
+    public class Gallery : IEnumerable<PhotoView>
     {
-        public List<Photo> listOfPhotos { get; set; }
+        public List<PhotoView> listOfPhotos { get; set; }
 
         public Gallery()
         {
-            listOfPhotos = new List<Photo>();
-            listOfPhotos.Add(new Photo {
+            listOfPhotos = new List<PhotoView>();
+            listOfPhotos.Add(new PhotoView {
                 PhotoID = new Guid(),
                 Name = "art_4.jpg",
                 Path = $"~/Images/art_4.jpg",
@@ -22,7 +22,7 @@ namespace Lab_1.EF
                 UploadedDate = DateTime.Now
 
             });
-            listOfPhotos.Add(new Photo
+            listOfPhotos.Add(new PhotoView
             {
                 PhotoID = new Guid(),
                 Name = "artistic-images-1.jpg",
@@ -31,7 +31,7 @@ namespace Lab_1.EF
                 UploadedDate = DateTime.Now
 
             });
-            listOfPhotos.Add(new Photo
+            listOfPhotos.Add(new PhotoView
             {
                 PhotoID = new Guid(),
                 Name = "artistic-lips_2.jpg",
@@ -40,7 +40,7 @@ namespace Lab_1.EF
                 UploadedDate = DateTime.Now
 
             });
-            listOfPhotos.Add(new Photo
+            listOfPhotos.Add(new PhotoView
             {
                 PhotoID = new Guid(),
                 Name = "Holi_colours_3.jpg",
@@ -51,7 +51,7 @@ namespace Lab_1.EF
             });
         }
 
-        public IEnumerator<Photo> GetEnumerator()
+        public IEnumerator<PhotoView> GetEnumerator()
         {
             return listOfPhotos.GetEnumerator();
         }
@@ -60,11 +60,11 @@ namespace Lab_1.EF
         {
             return GetEnumerator();
         }
-        public List<Photo> GetAll()
+        public List<PhotoView> GetAll()
         {
             return listOfPhotos;
         }
-        public void Add(Photo photo)
+        public void Add(PhotoView photo)
         {
             listOfPhotos.Add(photo);
         }

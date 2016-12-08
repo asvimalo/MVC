@@ -9,19 +9,14 @@ using System.Threading.Tasks;
 
 namespace LAB_DAL.Repo
 {
-    class PhotoRepository 
+    public class PhotoRepository 
     {
         public void Add(Photo photo)
         {
             using (var context = new GalleryEntities())
             {
-                var newPhoto = new Photo
-                {
-                    PhotoID = Guid.NewGuid(),
-                    Name = photo.Name,
-                    Path = photo.Path,
-                };
-                context.Photos.Add(newPhoto);
+                
+                context.Photos.Add(photo);
                 context.SaveChanges();
             }
         }
@@ -39,7 +34,7 @@ namespace LAB_DAL.Repo
         {
             using (var context = new GalleryEntities())
             {
-                var PicToDelete = context.Photos.Single(x => x.Id == ID);
+                var PicToDelete = context.Photos.Single(x => x.PhotoID == ID);
                 context.Photos.Remove(PicToDelete);
                 context.SaveChanges();
             }

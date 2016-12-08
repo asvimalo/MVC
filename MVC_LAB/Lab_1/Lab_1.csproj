@@ -166,8 +166,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Album.cs" />
-    <Compile Include="Models\Photo.cs" />
+    <Compile Include="Models\AlbumView.cs" />
+    <Compile Include="Models\PhotoView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -193,6 +193,12 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Loggin\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LAB_DAL\LAB_DAL.csproj">
+      <Project>{e860f99d-a587-46b2-b337-6a4ba916dfb9}</Project>
+      <Name>LAB_DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
