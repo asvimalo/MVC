@@ -10,9 +10,25 @@ using System.Threading.Tasks;
 namespace LAB_DAL.Repo
 {
     
-    public class CommentRepo
+    public class CommentRepo : IRepo<Comment >
     {
-        public void Add(Comment comment,Photo photo)
+        public void Add(Comment entity)
+        {
+            using (var context = new GalleryEntities())
+            {
+                context.Comments.Add(new Comment
+                {
+                    ComID = entity.ComID,
+                    Comments = entity.Comments,
+                    Date = entity.Date,
+                    PhotoID = entity.PhotoID,
+                    UserID = entity.UserID
+                });
+                context.SaveChanges();
+            }
+        }
+
+        public void Add(Comment comment,Photo photo) //Not in use. Replaced by Add(T entity)
         {
             using (var context = new GalleryEntities())
             {
@@ -36,6 +52,11 @@ namespace LAB_DAL.Repo
             }
         }
 
+        public void Delete(Guid ID)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(int ID)
         {
             using (var context = new GalleryEntities())
@@ -46,11 +67,24 @@ namespace LAB_DAL.Repo
             }
         }
 
-        public Comment Find(Expression<Func<Comment, bool>> predicate)
+        public Comment Find(Guid ID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Comment Find(Expression<Func<Comment, bool>> predicate) // Not in use, but might implement in the future => ex. from book
         {
             using (var context = new GalleryEntities())
             {
                 return context.Comments.Single(predicate);
+            }
+        }
+        //Wondering if should add this func to a helper class -TODO 
+        public static User GetUserByID(Guid userID)
+        {
+            using (var context = new GalleryEntities())
+            {
+                return context.Users.Single(x => x.UserID == userID);
             }
         }
     }
