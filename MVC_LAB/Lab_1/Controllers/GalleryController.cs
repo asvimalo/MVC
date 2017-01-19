@@ -75,5 +75,10 @@ namespace Lab_1.Controllers
             return View(repo.All());
 
         }
+        public ActionResult Edit()
+        {
+            return View();
+
+        }
     }
 }

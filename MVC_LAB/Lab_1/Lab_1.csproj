@@ -183,6 +183,7 @@
     <Content Include="Views\Gallery\Index.cshtml" />
     <Content Include="Views\Gallery\Upload.cshtml" />
     <Content Include="Views\Gallery\List.cshtml" />
+    <Content Include="Views\Gallery\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
