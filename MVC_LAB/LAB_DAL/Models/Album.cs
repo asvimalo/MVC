@@ -13,11 +13,11 @@ namespace LAB_DAL.Models
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public Guid PhotoID { get; set; }
-        [ForeignKey("PhotoID")]
-        public Photo Photo { get; set; }
+
+        public Guid UserID { get; set; }
+        [ForeignKey("UserID")]
+        public virtual User User { get; set; }
+
         public virtual ICollection<Photo> PhotoAlbum { get; set; } 
         public Album()
         {
