@@ -22,9 +22,6 @@ namespace LAB_DAL.Models
         public Album()
         {
             PhotoAlbum = new HashSet<Photo>();
-            Id = Guid.NewGuid();
-
-
         }
     }
 }

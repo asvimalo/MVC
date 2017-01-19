@@ -14,21 +14,28 @@ namespace LAB_DAL.Models
     {
         public Guid PhotoID { get; set; }
         [StringLength(50)]
-        public string Path { get; set; }
+        public string Path { get; set; } //Path or FileName
         [StringLength(50)]
         public string Name { get; set; }
         [StringLength(50)]
         public string Description { get; set; }
-        
-        
         public DateTime UploadedDate { get; set; }
-        
-        
-        
+
+        public virtual Guid UserID { get; set; }
+        public virtual Guid AlbumID { get; set; }
+        [ForeignKey("AlbumID")]
+        public virtual Album Album { get; set; }
+        [ForeignKey("UserID")]
+        public virtual User User { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
+
+
+
         public Photo()
         {
             
-            PhotoID = Guid.NewGuid();
+            Comments = new HashSet<Comment>();
         }
     }
 }
