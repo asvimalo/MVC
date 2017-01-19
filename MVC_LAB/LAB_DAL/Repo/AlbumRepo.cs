@@ -71,7 +71,7 @@ namespace LAB_DAL.Repo
                 return albumToFind;
             }
         }
-        //Test after delivered |ref from Book
+        //Test after delivered and compare debugging |ref from Book
         public Album Find(Expression<Func<Album, bool>> predicate)
         {
             using (var context = new GalleryEntities())
