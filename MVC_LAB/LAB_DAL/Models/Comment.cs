@@ -12,9 +12,11 @@ namespace LAB_DAL.Models
     public class Comment
     {
         [Key,Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ComID { get; set; }    
+        public int ComID { get; set; }
+        public string Title { get; set; }
         public string Comments { get; set; }
-        public DateTime Date { get; set; }
+        public Nullable<DateTime> DateCreated { get; set; }
+        public Nullable<DateTime> DateChanged { get; set; }
 
         public Guid? PhotoID { get; set; }
         public Guid UserID { get; set; }

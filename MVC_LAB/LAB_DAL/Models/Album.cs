@@ -12,8 +12,10 @@ namespace LAB_DAL.Models
     public class Album
     {
         public Guid Id { get; set; }
-        public string Name { get; set; }
+        public string AlbumName { get; set; }
 
+        
+        public DateTime DateCreated { get; set; }
         public Guid UserID { get; set; }
         [ForeignKey("UserID")]
         public virtual User User { get; set; }

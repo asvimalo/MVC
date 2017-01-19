@@ -13,13 +13,14 @@ namespace LAB_DAL.Models
     public class Photo
     {
         public Guid PhotoID { get; set; }
-        [StringLength(50)]
+        
         public string Path { get; set; } //Path or FileName
         [StringLength(50)]
         public string Name { get; set; }
         [StringLength(50)]
         public string Description { get; set; }
-        public DateTime UploadedDate { get; set; }
+        public Nullable<DateTime> UploadedDate { get; set; }
+        public Nullable<DateTime> DateChanged { get; set; }
 
         public virtual Guid UserID { get; set; }
         public virtual Guid AlbumID { get; set; }
