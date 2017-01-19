@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace LAB_DAL.Repo
 {
-    public class PhotoRepository 
+    public class PhotoRepository : IRepo<Photo>
     {
         public void Add(Photo photo)
         {
@@ -40,12 +40,41 @@ namespace LAB_DAL.Repo
             }
         }
 
-        public Photo Find(Expression<Func<Photo, bool>> predicate)
+        public Photo Find(Guid ID)
         {
             using (var context = new GalleryEntities())
             {
-                return context.Photos.Single(predicate);               
+                var PhotoToFind = context.Photos.Include("User").Include("Comments").Include("Album").Single(x => x.PhotoID == ID);
+                //Adding Comments whithout lazy Might have a conflict here
+                PhotoToFind.Comments = context.Comments.Include("User").Where(x => x.PhotoID == ID).ToList();
+                return PhotoToFind;              
             }
         }
+        //Still two functions to create
+        public Photo MostResentUploadedPicture()
+        {
+            using (var context = new GalleryEntities())
+            {
+                var recentUploadedPhoto = context.Photos.Include("User")
+                    .Include("Comments")
+                    .Include("Album")
+                    .OrderByDescending(x => x.UploadedDate)
+                    .FirstOrDefault();
+                if (recentUploadedPhoto != null)
+                {
+                    recentUploadedPhoto.Comments = context.Comments.Include("User").Where(x => x.PhotoID == recentUploadedPhoto.PhotoID).ToList();
+                }
+                return recentUploadedPhoto;
+                
+            }
+        }
+        public static User GetUserNameByID(Guid userID)
+        {
+            using (var context = new GalleryEntities())
+            {
+                return context.Users.Single(x => x.UserID == userID);
+            }
+        }
+         
     }
 }
