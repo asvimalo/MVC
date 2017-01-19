@@ -66,6 +66,7 @@
     <Compile Include="Repo\CommentRepo.cs" />
     <Compile Include="Interfaces\IRepo.cs" />
     <Compile Include="Repo\PhotoRepository.cs" />
+    <Compile Include="Repo\UserRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201612081900303_Create Photo.resx">

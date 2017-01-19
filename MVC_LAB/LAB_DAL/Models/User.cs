@@ -15,7 +15,7 @@ namespace LAB_DAL.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public string  password { get; set; }
-        public bool Admin { get; set; }
+        public bool isAdmin { get; set; }
 
         public virtual ICollection<Album> Albums { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
