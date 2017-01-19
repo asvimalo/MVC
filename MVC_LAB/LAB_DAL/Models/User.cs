@@ -19,7 +19,6 @@ namespace LAB_DAL.Models
 
         public virtual ICollection<Album> Albums { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
-
         public virtual ICollection<Photo> Photos { get; set; }
 
         public User()

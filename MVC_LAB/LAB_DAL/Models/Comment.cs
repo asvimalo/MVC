@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,12 +12,16 @@ namespace LAB_DAL.Models
     public class Comment
     {
         [Key,Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ComID { get; set; }
-        
+        public int ComID { get; set; }    
         public string Comments { get; set; }
-        
-        public Guid PhotoID { get; set; }
+        public DateTime Date { get; set; }
+
+        public Guid? PhotoID { get; set; }
+        public Guid UserID { get; set; }
+
         [ForeignKey("PhotoID")]
         public virtual Photo Photo { get; set; }
+        [ForeignKey("UserID")]
+        public virtual User User { get; set; }
     }
 }
