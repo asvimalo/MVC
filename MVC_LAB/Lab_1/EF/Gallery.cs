@@ -7,14 +7,15 @@ using Lab_1.Models;
 
 namespace Lab_1.EF
 {
-    public class Gallery : IEnumerable<PhotoView>
+    public class Gallery : IEnumerable<PhotoViewModel>
     {
-        public List<PhotoView> listOfPhotos { get; set; }
+        public List<PhotoViewModel> listOfPhotos { get; set; }
 
         public Gallery()
         {
-            listOfPhotos = new List<PhotoView>();
-            listOfPhotos.Add(new PhotoView {
+            listOfPhotos = new List<PhotoViewModel>();
+            listOfPhotos.Add(new PhotoViewModel
+            {
                 PhotoID = new Guid(),
                 Name = "art_4.jpg",
                 Path = $"~/Images/art_4.jpg",
@@ -22,7 +23,7 @@ namespace Lab_1.EF
                 UploadedDate = DateTime.Now
 
             });
-            listOfPhotos.Add(new PhotoView
+            listOfPhotos.Add(new PhotoViewModel
             {
                 PhotoID = new Guid(),
                 Name = "artistic-images-1.jpg",
@@ -31,7 +32,7 @@ namespace Lab_1.EF
                 UploadedDate = DateTime.Now
 
             });
-            listOfPhotos.Add(new PhotoView
+            listOfPhotos.Add(new PhotoViewModel
             {
                 PhotoID = new Guid(),
                 Name = "artistic-lips_2.jpg",
@@ -40,7 +41,7 @@ namespace Lab_1.EF
                 UploadedDate = DateTime.Now
 
             });
-            listOfPhotos.Add(new PhotoView
+            listOfPhotos.Add(new PhotoViewModel
             {
                 PhotoID = new Guid(),
                 Name = "Holi_colours_3.jpg",
@@ -51,7 +52,7 @@ namespace Lab_1.EF
             });
         }
 
-        public IEnumerator<PhotoView> GetEnumerator()
+        public IEnumerator<PhotoViewModel> GetEnumerator()
         {
             return listOfPhotos.GetEnumerator();
         }
@@ -60,11 +61,11 @@ namespace Lab_1.EF
         {
             return GetEnumerator();
         }
-        public List<PhotoView> GetAll()
+        public List<PhotoViewModel> GetAll()
         {
             return listOfPhotos;
         }
-        public void Add(PhotoView photo)
+        public void Add(PhotoViewModel photo)
         {
             listOfPhotos.Add(photo);
         }

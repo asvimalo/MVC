@@ -15,8 +15,19 @@ namespace LAB_DAL.Repo
         {
             using (var context = new GalleryEntities())
             {
-                
-                context.Photos.Add(photo);
+
+                context.Photos.Add(new Photo
+                {
+                    PhotoID = photo.PhotoID,
+                    Path = photo.Path,
+                    Name = photo.Name,
+                    Description = photo.Description,
+                    UploadedDate = photo.UploadedDate,
+                    DateChanged = photo.DateChanged,
+                    UserID = photo.UserID,
+                    AlbumID = photo.AlbumID
+
+                });
                 context.SaveChanges();
             }
         }
@@ -75,6 +86,14 @@ namespace LAB_DAL.Repo
                 return context.Users.Single(x => x.UserID == userID);
             }
         }
-         
+        public static List<Photo> GetLastPicturesUploaded()
+        {
+            using (var context = new GalleryEntities())
+            {
+                return context.Photos.OrderByDescending(x => x.UploadedDate).ToList();
+            }
+        }
+
+
     }
 }

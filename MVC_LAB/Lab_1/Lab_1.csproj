@@ -166,6 +166,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="HelperClasses\ModelViewToModelData.cs" />
     <Compile Include="Models\AlbumModelView.cs" />
     <Compile Include="Models\CommentViewModel.cs" />
     <Compile Include="Models\PhotoViewModel.cs" />

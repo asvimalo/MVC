@@ -20,7 +20,9 @@ namespace LAB_DAL.Repo
                 {
                     ComID = entity.ComID,
                     Comments = entity.Comments,
-                    Date = entity.Date,
+                    DateCreated = entity.DateCreated,
+                    DateChanged = entity.DateChanged,
+                    Title = entity.Title,
                     PhotoID = entity.PhotoID,
                     UserID = entity.UserID
                 });

@@ -22,8 +22,8 @@ namespace LAB_DAL.Models
         public Nullable<DateTime> UploadedDate { get; set; }
         public Nullable<DateTime> DateChanged { get; set; }
 
-        public virtual Guid UserID { get; set; }
-        public virtual Guid AlbumID { get; set; }
+        public  Guid UserID { get; set; }
+        public  Guid AlbumID { get; set; }
         [ForeignKey("AlbumID")]
         public virtual Album Album { get; set; }
         [ForeignKey("UserID")]
