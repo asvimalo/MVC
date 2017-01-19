@@ -64,7 +64,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repo\AlbumRepo.cs" />
     <Compile Include="Repo\CommentRepo.cs" />
-    <Compile Include="Repo\IRepo.cs" />
+    <Compile Include="Interfaces\IRepo.cs" />
     <Compile Include="Repo\PhotoRepository.cs" />
   </ItemGroup>
   <ItemGroup>

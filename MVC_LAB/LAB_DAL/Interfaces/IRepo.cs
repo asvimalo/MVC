@@ -15,6 +15,6 @@ namespace LAB_DAL.Repo
 
         IEnumerable<T> All();
 
-        T Find(Expression<Func<T, bool>> predicate);
+        T Find(Guid ID);
     }
 }
