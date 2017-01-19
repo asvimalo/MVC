@@ -14,7 +14,7 @@ namespace LAB_DAL.Models
         public Guid UserID { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public string  password { get; set; }
+        public string  Password { get; set; }
         public bool isAdmin { get; set; }
 
         public virtual ICollection<Album> Albums { get; set; }
