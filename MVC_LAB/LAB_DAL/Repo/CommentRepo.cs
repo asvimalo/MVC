@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace LAB_DAL.Repo
 {
     
-    public class CommentRepo : IRepo<Comment >
+    public class CommentRepo : IRepo<Comment>
     {
         public void Add(Comment entity)
         {
