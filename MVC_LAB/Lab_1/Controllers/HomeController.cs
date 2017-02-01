@@ -12,6 +12,7 @@ using Lab_1.HelperClasses;
 
 namespace Lab_1.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         //private Gallery _gallery = new Gallery();

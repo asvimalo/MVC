@@ -20,7 +20,7 @@ namespace Lab_1.Models
         public DateTime? DateChanged { get; set; }
 
         public Guid UserID { get; set; }
-        public Guid AlbumID { get; set; }
+        public Guid? AlbumID { get; set; }
         public string UserUploaderPhoto { get; set; }
 
 

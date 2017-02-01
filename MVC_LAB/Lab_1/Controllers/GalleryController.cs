@@ -40,7 +40,7 @@ namespace Lab_1.Controllers
         }
 
         [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase file, PhotoView model)
+        public ActionResult Upload(HttpPostedFileBase file, PhotoViewModel model)
         {
             
 
@@ -52,7 +52,7 @@ namespace Lab_1.Controllers
             }
 
             file.SaveAs(Path.Combine(Server.MapPath("~/Images"), file.FileName));
-            var photo = new PhotoView
+            var photo = new PhotoViewModel
             {
                 PhotoID = Guid.NewGuid(),
                 Name = model.Name,

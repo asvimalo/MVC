@@ -52,9 +52,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EF\GalleryEntities.cs" />
-    <Compile Include="Migrations\201612081900303_Create Photo.cs" />
-    <Compile Include="Migrations\201612081900303_Create Photo.Designer.cs">
-      <DependentUpon>201612081900303_Create Photo.cs</DependentUpon>
+    <Compile Include="Migrations\201702011419198_Erase Una vez.cs" />
+    <Compile Include="Migrations\201702011419198_Erase Una vez.Designer.cs">
+      <DependentUpon>201702011419198_Erase Una vez.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Album.cs" />
@@ -69,15 +69,15 @@
     <Compile Include="Repo\UserRepo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201612081900303_Create Photo.resx">
-      <DependentUpon>201612081900303_Create Photo.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201702011419198_Erase Una vez.resx">
+      <DependentUpon>201702011419198_Erase Una vez.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

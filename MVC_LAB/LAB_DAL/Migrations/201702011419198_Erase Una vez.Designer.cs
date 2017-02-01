@@ -7,13 +7,13 @@ namespace LAB_DAL.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class CreatePhoto : IMigrationMetadata
+    public sealed partial class EraseUnavez : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreatePhoto));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(EraseUnavez));
         
         string IMigrationMetadata.Id
         {
-            get { return "201612081900303_Create Photo"; }
+            get { return "201702011419198_Erase Una vez"; }
         }
         
         string IMigrationMetadata.Source

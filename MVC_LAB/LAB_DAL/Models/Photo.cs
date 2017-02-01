@@ -23,8 +23,8 @@ namespace LAB_DAL.Models
         public Nullable<DateTime> DateChanged { get; set; }
 
         public  Guid UserID { get; set; }
-        public  Guid AlbumID { get; set; }
-        [ForeignKey("AlbumID")]
+        public Guid? AlbumID { get; set; }
+       
         public virtual Album Album { get; set; }
         [ForeignKey("UserID")]
         public virtual User User { get; set; }
