@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace LAB_DAL.Repo
 {
@@ -29,6 +30,14 @@ namespace LAB_DAL.Repo
 
                 });
                 context.SaveChanges();
+            }
+        }
+        public void Update(Photo photo)
+        {
+            using (var ctx = new GalleryEntities())
+            {
+                ctx.Entry(photo).State = EntityState.Modified;
+                ctx.SaveChanges();
             }
         }
 

@@ -11,6 +11,7 @@ namespace LAB_DAL.Repo
     public interface IRepo<T>
     {
         void Add(T entity);
+        void Update(T Entity);
         void Delete(Guid ID);
 
         IEnumerable<T> All();
