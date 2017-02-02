@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EF\GalleryEntities.cs" />
-    <Compile Include="Interfaces\IRepository.cs" />
     <Compile Include="Migrations\201702011419198_Erase Una vez.cs" />
     <Compile Include="Migrations\201702011419198_Erase Una vez.Designer.cs">
       <DependentUpon>201702011419198_Erase Una vez.cs</DependentUpon>
@@ -67,7 +66,6 @@
     <Compile Include="Repo\CommentRepo.cs" />
     <Compile Include="Interfaces\IRepo.cs" />
     <Compile Include="Repo\PhotoRepository.cs" />
-    <Compile Include="Repo\Repository.cs" />
     <Compile Include="Repo\UserRepo.cs" />
   </ItemGroup>
   <ItemGroup>

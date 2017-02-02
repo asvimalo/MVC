@@ -54,8 +54,10 @@ namespace LAB_DAL.Repo
         {
             using (var context = new GalleryEntities())
             {
-                var PicToDelete = context.Photos.Single(x => x.PhotoID == ID);
-                context.Photos.Remove(PicToDelete);
+                //var PicToDelete = context.Photos.Single(x => x.PhotoID == ID);
+
+                //Test this option from book C#/.NET
+                context.Entry(new Photo { PhotoID = ID }).State = EntityState.Deleted;
                 context.SaveChanges();
             }
         }
