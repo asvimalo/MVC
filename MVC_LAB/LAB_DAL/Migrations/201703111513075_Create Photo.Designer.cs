@@ -13,7 +13,7 @@ namespace LAB_DAL.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201703111109135_Create Photo"; }
+            get { return "201703111513075_Create Photo"; }
         }
         
         string IMigrationMetadata.Source
