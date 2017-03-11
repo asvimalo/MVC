@@ -2,6 +2,7 @@
 using LAB_DAL.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -85,6 +86,15 @@ namespace LAB_DAL.Repo
             using (var context = new GalleryEntities())
             {
                 return context.Albums.Where(x => x.UserID == userID);
+            }
+        }
+
+        public void Update(Album album)
+        {
+            using (var ctx = new GalleryEntities())
+            {
+                ctx.Entry(album).State = EntityState.Modified;
+                ctx.SaveChanges();
             }
         }
     }

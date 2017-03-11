@@ -3,7 +3,7 @@ namespace LAB_DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class EraseUnavez : DbMigration
+    public partial class CreatePhoto : DbMigration
     {
         public override void Up()
         {

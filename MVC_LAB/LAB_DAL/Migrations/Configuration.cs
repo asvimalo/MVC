@@ -29,7 +29,7 @@ namespace LAB_DAL.Migrations
               new Photo { PhotoID = Guid.Parse("94f2370d-5035-4f56-9530-ce1fca50677f"), Path = "~/Images/Holi_colours_3.jpg", Name = "Mercado de las especias", UploadedDate = DateTime.Now, UserID = Guid.Parse("cab2f1f2-d07d-43fe-8286-54db4f2a69bc") }
 
             );
-            context.Users.AddOrUpdate(x => x.UserID,
+            context.Users.AddOrUpdate(x => x.UserID, 
 
              new User { UserID = Guid.Parse("f324e4d5-2dfb-487a-bc1e-e95a69310e66"),  Name = "Ulf Littorin" , Email = "littorin@gmail.com", Password = "elcubano", isAdmin = false},
              new User { UserID = Guid.Parse("469ebc0f-1a9c-4ff9-91d2-ed36ce16d8db"), Name = "Andrés ElMago", Email = "andres@gmail.com", Password = "elriojano", isAdmin = true },
