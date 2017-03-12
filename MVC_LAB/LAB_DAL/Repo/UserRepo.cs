@@ -28,17 +28,45 @@ namespace LAB_DAL.Repo
 
         public IEnumerable<User> All()
         {
-            throw new NotImplementedException();
+            using (var context = new GalleryEntities())
+            {
+                var users = context.Users
+                    .Include(u => u.Albums)
+                    .Include(u => u.Comments)
+                    .Include(u => u.Photos);
+                return users;
+            }
         }
 
         public void Delete(Guid ID)
         {
-            throw new NotImplementedException();
+            using (var context = new GalleryEntities())
+            {
+                var userToDelete = context.Users.Where(x => x.UserID == ID)
+                    .Include(u => u.Comments)
+                    .Include(u => u.Albums)
+                    .Include(u => u.Photos)
+                    .FirstOrDefault();
+
+                if (userToDelete != null)
+                {
+                    context.Users.Remove(userToDelete);
+                    context.SaveChanges();
+                }
+            }
         }
 
         public User Find(Guid ID)
         {
-            throw new NotImplementedException();
+            using (var context = new GalleryEntities())
+            {
+                var user = context.Users.Where(x => x.UserID == ID)
+                    .Include(u => u.Photos)
+                    .Include(u => u.Albums)
+                    .Include(u => u.Comments)
+                    .FirstOrDefault();
+                return user;
+            }
         }
         public User GetUserAuth(string email, string password)
         {

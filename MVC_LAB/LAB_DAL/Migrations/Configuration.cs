@@ -16,18 +16,7 @@ namespace LAB_DAL.Migrations
 
         protected override void Seed(LAB_DAL.EF.GalleryEntities context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-            //  to avoid creating duplicate seed data. E.g.
-            //
-            //    context.People.AddOrUpdate(
-            //      p => p.FullName,
-            //      new Person { FullName = "Andrew Peters" },
-            //      new Person { FullName = "Brice Lambson" },
-            //      new Person { FullName = "Rowan Miller" }
-            //    );
-            //
+            
             context.Photos.AddOrUpdate(x => x.PhotoID,
 
               new Photo { PhotoID = Guid.Parse("69093d3a-0375-41d6-949e-bf4b043aafd8"), Path = "~/Images/art_4.jpg", Name = "Manos Unidas", UploadedDate = DateTime.Now, UserID = Guid.Parse("f324e4d5-2dfb-487a-bc1e-e95a69310e66") },

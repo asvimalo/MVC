@@ -56,13 +56,15 @@ namespace Lab_1.Controllers
             {
                 PhotoID = Guid.NewGuid(),
                 Name = model.Name,
-                Path = "~/Images/" + file.FileName
+                Path = "~/Images/" + file.FileName,
+                Description = model.Description
             };
 
             repo.Add(new Photo
             {
                 PhotoID = photo.PhotoID,
                 Name = photo.Name,
+                Description = photo.Description,
                 Path = photo.Path,
                 UploadedDate = DateTime.Now
                 
