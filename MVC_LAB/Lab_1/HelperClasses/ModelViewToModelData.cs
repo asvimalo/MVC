@@ -19,7 +19,7 @@ namespace Lab_1.HelperClasses
             photo.Description = pic.Description;
             photo.UploadedDate = pic.UploadedDate;
             photo.DateChanged = pic.DateChanged;
-            photo.AlbumID = pic.AlbumID;
+            
             return photo;
         }
         public static PhotoViewModel ReturnPhotoModelView(Photo pic)
@@ -32,7 +32,7 @@ namespace Lab_1.HelperClasses
             photo.Description = pic.Description;
             photo.UploadedDate = pic.UploadedDate;
             photo.DateChanged = pic.DateChanged;
-            photo.AlbumID = pic.AlbumID;
+            
             return photo;
         }
     }

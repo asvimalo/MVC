@@ -16,11 +16,15 @@ namespace Lab_1.Models
         [Required(ErrorMessage = "Enter a description")]
         [StringLength(50)]
         public string Description { get; set; }
+        [Display(Name="Posted")]
         public DateTime? UploadedDate { get; set; }
+        [Display(Name="Edited")]
         public DateTime? DateChanged { get; set; }
-
+        [Required]
+        [Display(Name="Public")]
+        public bool IsPublicPicture { get; set; }
         public Guid UserID { get; set; }
-        public Guid? AlbumID { get; set; }
+        public Guid? GalleryID { get; set; }
         public string UserUploaderPhoto { get; set; }
 
 

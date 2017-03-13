@@ -14,23 +14,18 @@ namespace Lab_1.Controllers
 {
     public class GalleryController : Controller
     {
-        PhotoRepository repo = new PhotoRepository();
-        //public static string Data { get; set; }
-        //public ActionResult Show(int id, string meta)
-        //{
-        //    if (string.IsNullOrWhiteSpace(Data)) 
-        //    {
-        //        Data = meta;
-        //    }
-        //    return Content(Data);
-        //}
+        PhotoRepository photoRepo;
+        CommentRepo commentRepo;
 
-        //public List<Photo> Gallery { get; set; } = new List<Photo>();
-        // GET: Gallery
-
+        public GalleryController()
+        {
+            this.photoRepo = new PhotoRepository();
+            this.commentRepo = new CommentRepo();
+        }
+        [AllowAnonymous]
         public ActionResult Index()
         {
-            return View(repo.All());
+            return View();
 
         }
         public ActionResult Upload()
@@ -60,7 +55,7 @@ namespace Lab_1.Controllers
                 Description = model.Description
             };
 
-            repo.Add(new Photo
+            photoRepo.Add(new Photo
             {
                 PhotoID = photo.PhotoID,
                 Name = photo.Name,
@@ -74,7 +69,7 @@ namespace Lab_1.Controllers
         }
         public ActionResult List()
         {
-            return View(repo.All());
+            return View(photoRepo.All());
 
         }
         public ActionResult Edit()
