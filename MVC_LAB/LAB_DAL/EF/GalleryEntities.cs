@@ -7,15 +7,17 @@ namespace LAB_DAL.EF
 
     public class GalleryEntities : DbContext
     {
-        
-        public GalleryEntities()
-            : base("name=GalleryEntities")
-        {
-        }
         public DbSet<Photo> Photos { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Album> Albums { get; set; }
         public DbSet<User> Users { get; set; }
+
+        public GalleryEntities()
+            : base("name=GalleryEntities")
+        {
+
+        }
+        
 
     }
 
