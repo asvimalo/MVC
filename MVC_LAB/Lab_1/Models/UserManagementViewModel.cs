@@ -6,7 +6,7 @@ namespace Lab_1.Models
 {
     public class LoginModel
     {
-        public Guid UserID { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         [Required]
         [DataType(DataType.EmailAddress)]
@@ -14,8 +14,10 @@ namespace Lab_1.Models
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        public bool isAdmin { get; set; }
+
+        public bool Admin { get; set; }
     }
+
     public class RegistrationModel
     {
         [Required]
@@ -28,7 +30,7 @@ namespace Lab_1.Models
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm Password")]
-        [Compare("Password", ErrorMessage = "Password do not match")]
+        [Compare("Password", ErrorMessage = "Passwords do not match.")]
         public string ConfirmPassword { get; set; }
     }
 }

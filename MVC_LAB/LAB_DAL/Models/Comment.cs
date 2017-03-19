@@ -8,22 +8,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LAB_DAL.Models
 {
-    [Table("Comment")]
+    
     public class Comment
     {
-        [Key,Required, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ComID { get; set; }
-        public string Title { get; set; }
-        public string Comments { get; set; }
-        public Nullable<DateTime> DateCreated { get; set; }
-        public Nullable<DateTime> DateChanged { get; set; }
+        public Guid Id { get; set; }
+        public string Text { get; set; }
+        public DateTime Date { get; set; }
+        public Guid? PhotoId { get; set; }
+        public Guid UserId { get; set; }
 
-        public Guid? PhotoID { get; set; }
-        public Guid UserID { get; set; }
-
-        [ForeignKey("PhotoID")]
-        public virtual Photo Photo { get; set; }
-        [ForeignKey("UserID")]
-        public virtual User User { get; set; }
+        public Photo Photo { get; set; }
+        public User User { get; set; }
     }
 }

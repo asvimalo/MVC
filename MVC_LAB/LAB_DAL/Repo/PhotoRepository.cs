@@ -10,101 +10,71 @@ using System.Data.Entity;
 
 namespace LAB_DAL.Repo
 {
-    public class PhotoRepository : IRepo<Photo>
+    public class PhotoRepository : IRepository<Photo>
     {
-        public void Add(Photo photo)
+        public void Add(Photo item)
         {
-            using (var context = new GalleryEntities())
+            using (var db = new GalleryEntities())
             {
+                db.Photos.Add(item);
 
-                context.Photos.Add(new Photo
-                {
-                    PhotoID = photo.PhotoID,
-                    Path = photo.Path,
-                    Name = photo.Name,
-                    Description = photo.Description,
-                    UploadedDate = photo.UploadedDate,
-                    DateChanged = photo.DateChanged,
-                    UserID = photo.UserID,
-                    AlbumID = photo.AlbumID
-
-                });
-                context.SaveChanges();
-            }
-        }
-        public void Update(Photo photo)
-        {
-            using (var ctx = new GalleryEntities())
-            {
-                ctx.Entry(photo).State = EntityState.Modified;
-                ctx.SaveChanges();
+                db.SaveChanges();
             }
         }
 
-        public IEnumerable<Photo> All()
+        public void Edit(Photo item)
         {
-            using (var context = new GalleryEntities())
+            throw new NotImplementedException();
+        }
+
+        public void Remove(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Photo> GetItems()
+        {
+            using (var db = new GalleryEntities())
             {
-               return context.Photos.ToList();
-                
+                return db.Photos.Include("Comments").Include("Album").Include("User").ToList();
             }
         }
 
-        public void Delete(Guid ID)
+        public Photo FindById(Guid id)
         {
-            using (var context = new GalleryEntities())
+            using (var db = new GalleryEntities())
             {
-                //var PicToDelete = context.Photos.Single(x => x.PhotoID == ID);
+                var photo = db.Photos.Include("User").Include("Comments").Include("Album").FirstOrDefault(x => x.Id == id);
+                photo.Comments = db.Comments.Include("User").Where(x => x.PhotoId == photo.Id).ToList();
 
-                //Test this option from book C#/.NET
-                context.Entry(new Photo { PhotoID = ID }).State = EntityState.Deleted;
-                context.SaveChanges();
-            }
-        }
-
-        public Photo Find(Guid ID)
-        {
-            using (var context = new GalleryEntities())
-            {
-                var PhotoToFind = context.Photos.Include("User").Include("Comments").Include("Album").Single(x => x.PhotoID == ID);
-                //Adding Comments whithout lazy Might have a conflict here
-                PhotoToFind.Comments = context.Comments.Include("User").Where(x => x.PhotoID == ID).ToList();
-                return PhotoToFind;              
-            }
-        }
-        //Still two functions to create
-        public Photo MostResentUploadedPicture()
-        {
-            using (var context = new GalleryEntities())
-            {
-                var recentUploadedPhoto = context.Photos.Include("User")
-                    .Include("Comments")
-                    .Include("Album")
-                    .OrderByDescending(x => x.UploadedDate)
-                    .FirstOrDefault();
-                if (recentUploadedPhoto != null)
-                {
-                    recentUploadedPhoto.Comments = context.Comments.Include("User").Where(x => x.PhotoID == recentUploadedPhoto.PhotoID).ToList();
-                }
-                return recentUploadedPhoto;
-                
-            }
-        }
-        public static User GetUserNameByID(Guid userID)
-        {
-            using (var context = new GalleryEntities())
-            {
-                return context.Users.Single(x => x.UserID == userID);
-            }
-        }
-        public static List<Photo> GetLastPicturesUploaded()
-        {
-            using (var context = new GalleryEntities())
-            {
-                return context.Photos.OrderByDescending(x => x.UploadedDate).ToList();
+                return photo;
             }
         }
 
+        public Photo GetLastUploadedPhoto()
+        {
+            using (var db = new GalleryEntities())
+            {
+                var photo =
+                    db.Photos.Include("User")
+                        .Include("Comments")
+                        .Include("Album")
+                        .OrderByDescending(x => x.DateAdded)
+                        .FirstOrDefault();
+                if (photo != null)
+                    photo.Comments = db.Comments.Include("User").Where(x => x.PhotoId == photo.Id).ToList();
+
+                return photo;
+            }
+        }
+
+        public static string GetUserName(Guid id)
+        {
+            using (var db = new GalleryEntities())
+            {
+                return db.Users.Single(x => x.Id == id).Name;
+            }
+        }
 
     }
 }

@@ -1,0 +1,44 @@
+﻿@model Lab_1.Models.CommentViewModel
+
+@{
+    var options = new AjaxOptions
+    {
+        HttpMethod = "POST",
+        UpdateTargetId = "photoComments",
+        InsertionMode = InsertionMode.Replace,
+        LoadingElementDuration = 2000,
+        LoadingElementId = "loader",
+        OnBegin = "begin",
+        OnSuccess = "success"
+    };
+}
+
+@using (Ajax.BeginForm("AddComment", "Gallery", options))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.HiddenFor(model => model.PhotoId, new { @value = Model.PhotoId })
+        </div>
+        <div class="form-group">
+            @Html.HiddenFor(model => model.Commenter, new { @value = User.Identity.Name })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Comment, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+<script src="~/Scripts/addComment.js" type="text/javascript"></script>

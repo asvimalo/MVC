@@ -9,73 +9,93 @@ using System.IO;
 using LAB_DAL.EF;
 using LAB_DAL.Repo;
 using LAB_DAL.Models;
+using Lab_1.HelperClasses;
 
 namespace Lab_1.Controllers
 {
     public class GalleryController : Controller
     {
-        PhotoRepository photoRepo;
-        CommentRepo commentRepo;
+        private PhotoRepository photoRepository;
+        private CommentRepo commentRepository;
 
         public GalleryController()
         {
-            this.photoRepo = new PhotoRepository();
-            this.commentRepo = new CommentRepo();
+            photoRepository = new PhotoRepository();
+            commentRepository = new CommentRepo();
         }
+
+        // GET: Gallery
         [AllowAnonymous]
         public ActionResult Index()
         {
-            return View();
+            var photos = new List<GalleryPhotoViewModel>();
+            photos.MapPhotos(photoRepository.GetItems().ToList());
 
+            return View(photos);
         }
-        public ActionResult Upload()
-        {
-            return View();
 
+        [AllowAnonymous]
+        public ActionResult Details(DetailsPhotoViewModel photo)
+        {
+            var picture = photoRepository.FindById(photo.Id);
+            photo.MapPhoto(picture);
+
+            return View(photo);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult UploadPhoto()
+        {
+            
+            var photo = new GalleryPhotoViewModel();
+            var albums = AlbumRepo.GetAlbumsByUserId(UserRepo.GetUserId(User.Identity.Name));
+            albums.ForEach(x => photo.Albums.Add(new SelectListItem { Text = x.Name, Value = x.Id.ToString() }));
+
+            return PartialView(photo);
         }
 
         [HttpPost]
-        public ActionResult Upload(HttpPostedFileBase file, PhotoViewModel model)
+        [ValidateAntiForgeryToken]
+        public ActionResult UploadPhoto(GalleryPhotoViewModel model, HttpPostedFileBase photo)
         {
             
+            if (!ModelState.IsValid)
+                return PartialView(model);
 
-            if (!ModelState.IsValid) { return View(model); }
-            if (file == null)
-            {
-                ModelState.AddModelError("error", "Ingen bild?");
-                return View(model);
-            }
+            photoRepository.Add(model.MapPhoto(photo.FileName, UserRepo.GetUserId(User.Identity.Name)));
 
-            file.SaveAs(Path.Combine(Server.MapPath("~/Images"), file.FileName));
-            var photo = new PhotoViewModel
-            {
-                PhotoID = Guid.NewGuid(),
-                Name = model.Name,
-                Path = "~/Images/" + file.FileName,
-                Description = model.Description
-            };
-
-            photoRepo.Add(new Photo
-            {
-                PhotoID = photo.PhotoID,
-                Name = photo.Name,
-                Description = photo.Description,
-                Path = photo.Path,
-                UploadedDate = DateTime.Now
-                
-            });
-
-            return RedirectToAction("List");
+            photo.SaveAs(Path.Combine(Server.MapPath("~/Photos"), photo.FileName));
+            return RedirectToAction("Index");
         }
-        public ActionResult List()
-        {
-            return View(photoRepo.All());
 
+        [AllowAnonymous]
+        [HttpGet]
+        public ActionResult Comments(ICollection<CommentViewModel> comments)
+        {
+            return PartialView(comments);
         }
-        public ActionResult Edit()
-        {
-            return View();
 
+        [HttpGet]
+        public ActionResult AddComment(GalleryPhotoViewModel model)
+        {
+            var comment = new CommentViewModel { PhotoId = model.Id };
+
+            return PartialView(comment);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddComment(CommentViewModel model)
+        {
+            model.Commenter = User.Identity.Name;
+            commentRepository.Add(model.MapComment());
+
+            var photo = new DetailsPhotoViewModel();
+            var picture = photoRepository.FindById(model.PhotoId);
+            photo.MapPhoto(picture);
+
+            return PartialView("Comments", photo.Comments);
         }
     }
 }

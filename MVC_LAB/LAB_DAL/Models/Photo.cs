@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,33 +9,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LAB_DAL.Models
 {
-    [Table("Photo")]
+    
     public class Photo
     {
-        public Guid PhotoID { get; set; }
-        
-        public string Path { get; set; } //Path or FileName
-        [StringLength(50)]
+        public Guid Id { get; set; }
         public string Name { get; set; }
-        [StringLength(50)]
         public string Description { get; set; }
-        public Nullable<DateTime> UploadedDate { get; set; }
-        public Nullable<DateTime> DateChanged { get; set; }
+        public string FileName { get; set; }
+        public DateTime DateAdded { get; set; }
+        public Guid UserId { get; set; }
+        public Guid? AlbumId { get; set; }
 
-        public  Guid UserID { get; set; }
-        public Guid? AlbumID { get; set; }
-       
         public virtual Album Album { get; set; }
-        [ForeignKey("UserID")]
         public virtual User User { get; set; }
 
         public virtual ICollection<Comment> Comments { get; set; }
 
-
-
         public Photo()
         {
-            
             Comments = new HashSet<Comment>();
         }
     }

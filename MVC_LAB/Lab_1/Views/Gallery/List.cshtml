@@ -1,43 +1,11 @@
-﻿@model IEnumerable<LAB_DAL.Models.Photo>
+﻿@model IEnumerable<Lab_1.Models.GalleryPhotoViewModel>
 
-@{
-    ViewBag.Title = "List";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+@foreach (var photo in Model)
+{
+    <div class="col-sm-3">
+        <a href="@string.Format($"/Gallery/Details/{photo.Id}")" class="thumbnail">
+            <h3 class="caption" id="ctr">@photo.Name</h3>
+            <img src="~/Photos/@photo.FileName" alt="@photo.Name">
+        </a>
+    </div>
 }
-
-<h2 class="text-center">Uploaded</h2>
-
-<p>
-    <a class="btn btn-primary" href="@Url.Action("Upload", "Gallery")"><span>Upload</span></a>
-</p>
-<div class="row">
-
-    @foreach (var item in Model)
-    {
-
-        <div class="thumbnail col-md-3">
-            @{
-                string _url = Path.GetFileName(item.Path);
-                <img class="img-responsive" src="~/Images/@_url" />
-            }
-            <div class="caption">
-
-
-                @Html.ActionLink("Edit", "Edit", new { id = item.PhotoID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.PhotoID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.PhotoID })
-                @*@Html.DisplayFor(modelItem => item.Description)
-                    @Html.DisplayFor(modelItem => item.UploadedDate.Date)*@
-
-            </div>
-        </div>
-
-
-
-        <div>
-
-        </div>
-
-
-                }
-</div>

@@ -10,91 +10,59 @@ using System.Threading.Tasks;
 
 namespace LAB_DAL.Repo
 {
-    public class AlbumRepo : IRepo<Album>
+    public class AlbumRepo : IRepository<Album>
     {
-        public void Add(Album album)
+        public void Add(Album item)
         {
-            using (var context = new GalleryEntities())
+            using (var db = new GalleryEntities())
             {
-                
-                context.Albums.Add(album);
-                context.SaveChanges();
-            }
-        }
-        //public void AddPhotoToAlbum(Photo photo, Album album)
-        //{
-        //    using (var context = new GalleryEntities())
-        //    {
-        //        var albumToAddPhoto = context.Albums.Single(x => x.Id == album.Id);
-        //        var photoToAdd = context.Photos.Single(x => x.PhotoID == photo.PhotoID);
-        //        albumToAddPhoto.PhotoAlbum.Add(photoToAdd);
-                
-        //        context.SaveChanges();
-        //    }
-        //}
+                db.Albums.Add(item);
 
-        public IEnumerable<Album> All()
-        {
-            using (var context = new GalleryEntities())
-            {
-                return context.Albums.ToList();
-
+                db.SaveChanges();
             }
         }
 
-        public void Delete(Guid ID)
+        public void Edit(Album photo)
         {
-            using (var context = new GalleryEntities())
+            throw new NotImplementedException();
+        }
+
+        public void Remove(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Album> GetItems()
+        {
+            using (var db = new GalleryEntities())
             {
-                var AlbumToDelete = context.Albums.Single(x => x.Id == ID);
-                context.Albums.Remove(AlbumToDelete);
-                context.SaveChanges();
+                return db.Albums.Include("User").Include("Photos").ToList();
             }
         }
 
-        public Album Find(Guid ID)
+        public Album FindById(Guid id)
         {
-            //Testing eager !!!! Might missing a conf. Tested nedded
-
-            using (var context = new GalleryEntities())
+            using (var db = new GalleryEntities())
             {
-                var albumToFind = context.Albums.Include("User")
-                    .Include("Photos")
-                    .FirstOrDefault(x => x.Id == ID);
-                if (albumToFind !=null)
+                var album = db.Albums.Include("User").Include("Photos").FirstOrDefault(x => x.Id == id);
+                if (album != null)
                 {
-                    albumToFind.PhotoAlbum = context.Photos.Include("User")
-                        .Include("Album")
-                        .Include("Comments")
-                        .Where(x => x.AlbumID == albumToFind.Id)
-                        .ToList();
+                    album.Photos =
+                        db.Photos.Include("User")
+                            .Include("Album")
+                            .Include("Comments")
+                            .Where(x => x.AlbumId == album.Id)
+                            .ToList();
                 }
-                return albumToFind;
-            }
-        }
-        //Test after delivered and compare debugging |ref from Book
-        public Album Find(Expression<Func<Album, bool>> predicate)
-        {
-            using (var context = new GalleryEntities())
-            {
-                return context.Albums.Single(predicate);
-            }
-        }
-        //Wondering if I should create a helper class
-        public static IEnumerable<Album> GetAllAlbumsByUserID(Guid userID)
-        {
-            using (var context = new GalleryEntities())
-            {
-                return context.Albums.Where(x => x.UserID == userID);
+                return album;
             }
         }
 
-        public void Update(Album album)
+        public static List<Album> GetAlbumsByUserId(Guid id)
         {
-            using (var ctx = new GalleryEntities())
+            using (var db = new GalleryEntities())
             {
-                ctx.Entry(album).State = EntityState.Modified;
-                ctx.SaveChanges();
+                return db.Albums.Where(x => x.UserId == id).ToList();
             }
         }
     }

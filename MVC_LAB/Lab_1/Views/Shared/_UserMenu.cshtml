@@ -1,0 +1,25 @@
+﻿@{
+    var options = new AjaxOptions
+    {
+        HttpMethod = "GET",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "user"
+    };
+}
+
+<ul class="nav navbar-nav navbar-right">
+    @if (User.Identity.IsAuthenticated)
+    {
+        if (User.IsInRole("Admin"))
+        {
+            <li>@Html.ActionLink("Manage Site", "Index", "Management", new { area = "Administration" }, null)</li>
+        }
+
+        <li><a href="@Url.Action("Logout", "Account")">Log Out</a></li>
+    }
+    else
+    {
+        <li>@Ajax.ActionLink("Register", "Register", "Account", options)</li>
+        <li>@Ajax.ActionLink("Log in", "Login", "Account", options)</li>
+    }
+</ul>

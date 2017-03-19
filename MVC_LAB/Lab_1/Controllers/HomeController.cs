@@ -12,29 +12,30 @@ using Lab_1.HelperClasses;
 
 namespace Lab_1.Controllers
 {
-    [AllowAnonymous]
     public class HomeController : Controller
     {
-        //private Gallery _gallery = new Gallery();
-        // GET: Home
-        private PhotoRepository repo { get; set; }
+        private PhotoRepository PhotoRepository { get; set; }
 
         public HomeController()
         {
-            repo = new PhotoRepository();
+            PhotoRepository = new PhotoRepository();
         }
+
         [AllowAnonymous]
         public ActionResult Index()
         {
-            var recentUploadedPics = new List<PhotoViewModel>();
-            var recentUploadedDB = PhotoRepository.GetLastPicturesUploaded();
-            foreach (var photo in recentUploadedDB)
-            {
-                recentUploadedPics.Add(ModelViewToModelData.ReturnPhotoModelView(photo));
-            }
+            var photo = new GalleryPhotoViewModel();
+            photo.MapPhoto(PhotoRepository.GetLastUploadedPhoto());
 
-            return View(recentUploadedPics); //_gallery
+            return View(photo);
         }
 
+        [AllowAnonymous]
+        public ActionResult About()
+        {
+            ViewBag.Message = "Check our fantastic pictures";
+
+            return View();
+        }
     }
 }

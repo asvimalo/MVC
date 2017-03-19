@@ -12,22 +12,24 @@ namespace Lab_1.Controllers
 {
     public class AccountController : Controller
     {
-        // GET: Loggin
-        private UserRepo userRepo;
+        private UserRepo userRepository;
+
         public AccountController()
         {
-            userRepo = new UserRepo();
+            userRepository = new UserRepo();
         }
+
+        // GET: User
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Login()
         {
             if (User.Identity.IsAuthenticated)
-            {
                 return RedirectToAction("Index", "Home");
-            }
+
             return PartialView();
         }
+
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -37,23 +39,25 @@ namespace Lab_1.Controllers
                 return PartialView(user);
 
             var dbUser = new LoginModel();
-            dbUser.MapUser(userRepo.GetUserAuth(user.Email, user.Password));
+            dbUser.MapUser(userRepository.GetUserByCredentials(user.Email, user.Password));
+
             if (dbUser.Email != null && dbUser.Password != null)
             {
                 var identity = new ClaimsIdentity(new[]
                 {
                     new Claim(ClaimTypes.Name, dbUser.Name),
                     new Claim(ClaimTypes.Email, dbUser.Email),
-                    new Claim(ClaimTypes.Role, dbUser.isAdmin ? "Admin" : "User"),
-                    new Claim(ClaimTypes.NameIdentifier, dbUser.UserID.ToString()),
+                    new Claim(ClaimTypes.Role, dbUser.Admin ? "Admin" : "User"),
+                    new Claim(ClaimTypes.NameIdentifier, dbUser.Id.ToString()),
                 }, "AppCookie");
 
-                var context = Request.GetOwinContext();
-                var auth = context.Authentication;
+                var ctx = Request.GetOwinContext();
+                var auth = ctx.Authentication;
                 auth.SignIn(identity);
 
                 return RedirectToAction("Index", "Home");
             }
+
             return PartialView(user);
         }
 
@@ -62,10 +66,8 @@ namespace Lab_1.Controllers
         public ActionResult Register()
         {
             if (User.Identity.IsAuthenticated)
-            {
                 return RedirectToAction("Index", "Home");
-            }
-            
+
             return PartialView();
         }
 
@@ -75,21 +77,21 @@ namespace Lab_1.Controllers
         public ActionResult Register(RegistrationModel user)
         {
             if (ModelState.IsValid)
-            {
-                userRepo.Add(user.MapUser());
-            }
+                userRepository.Add(user.MapUser());
             else
             {
                 ModelState.AddModelError("", "Missing information");
                 return PartialView(user);
             }
+
             return RedirectToAction("Index", "Home");
         }
+
         [HttpGet]
         public ActionResult Logout()
         {
-            var context = Request.GetOwinContext();
-            var auth = context.Authentication;
+            var ctx = Request.GetOwinContext();
+            var auth = ctx.Authentication;
 
             auth.SignOut("AppCookie");
             return RedirectToAction("Index", "Home");

@@ -3,30 +3,19 @@
     padding-bottom: 20px;
 }
 
-/* Set padding to keep content from hitting the edges */
+
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
+
+.dl-horizontal dt {
+    white-space: normal;
+}
+
 input,
 select,
 textarea {
     max-width: 280px;
 }
-
-.mycontainer {
-    display: flex;
-    
-  flex-direction: row;
-  /*flex-wrap: nowrap;*/
-  align-items: flex-start
-  
-}
-.thumbnail {
-    padding-right: 0px !important;
-    padding-left: 0px !important;
-    
-}
-

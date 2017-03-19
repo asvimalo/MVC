@@ -1,0 +1,39 @@
+﻿@model Lab_1.Models.DetailsPhotoViewModel
+
+@{
+    ViewBag.Title = "Show";
+}
+
+@{
+    var options = new AjaxOptions
+    {
+        UpdateTargetId = "addComment",
+        InsertionMode = InsertionMode.Replace,
+        HttpMethod = "GET",
+    };
+}
+
+<h2>Show</h2>
+
+<div class="row">
+    <h3>@Model.Name</h3>
+    <img class="img-thumbnail" style="max-height: 75%" src="~/Photos/@Model.FileName" alt="@Model.Name" />
+    <p>@Model.Description</p>
+    <p>Uploaded by: @Model.UploadedBy</p>
+
+    <h3>Comments</h3>
+    @if (User.Identity.IsAuthenticated)
+    {
+        @Ajax.ActionLink("Add Comment", "AddComment", Model, options)
+        <div id="addComment"></div>
+        <div class="loader" style="display: none"></div>
+    }
+    <div id="photoComments">
+        @Html.Partial("Comments", Model.Comments)
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+<script src="~/Scripts/reloadComments.js" type="text/javascript"></script>

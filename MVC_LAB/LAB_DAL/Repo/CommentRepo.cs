@@ -11,92 +11,50 @@ using System.Threading.Tasks;
 namespace LAB_DAL.Repo
 {
     
-    public class CommentRepo : IRepo<Comment>
+    public class CommentRepo : IRepository<Comment>
     {
-        public void Add(Comment entity)
+        public void Add(Comment item)
         {
-            using (var context = new GalleryEntities())
+            using (var db = new GalleryEntities())
             {
-                context.Comments.Add(new Comment
+                db.Comments.Add(new Comment
                 {
-                    ComID = entity.ComID,
-                    Comments = entity.Comments,
-                    DateCreated = entity.DateCreated,
-                    DateChanged = entity.DateChanged,
-                    Title = entity.Title,
-                    PhotoID = entity.PhotoID,
-                    UserID = entity.UserID
+                    Id = item.Id,
+                    Text = item.Text,
+                    Date = item.Date,
+                    PhotoId = item.PhotoId,
+                    UserId = item.UserId
                 });
-                context.SaveChanges();
+
+                db.SaveChanges();
             }
         }
 
-        public void Add(Comment comment,Photo photo) //Not in use. Replaced by Add(T entity)
-        {
-            using (var context = new GalleryEntities())
-            {
-                var newComment = new Comment
-                {
-                    
-                    Comments = comment.Comments,
-                    PhotoID = photo.PhotoID,
-                };
-                context.Comments.Add(newComment);
-                context.SaveChanges();
-            }
-        }
-
-        public IEnumerable<Comment> All()
-        {
-            using (var context = new GalleryEntities())
-            {
-                return context.Comments.ToList();
-
-            }
-        }
-
-        public void Delete(Guid ID)
+        public void Edit(Comment item)
         {
             throw new NotImplementedException();
         }
 
-        public void Delete(int ID)
-        {
-            using (var context = new GalleryEntities())
-            {
-                var CommentToDelete = context.Comments.Single(x => x.ComID == ID);
-                context.Comments.Remove(CommentToDelete);
-                context.SaveChanges();
-            }
-        }
-
-        public Comment Find(Guid ID)
+        public void Remove(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Comment Find(Expression<Func<Comment, bool>> predicate) // Not in use, but might implement in the future => ex. from book
+        public IEnumerable<Comment> GetItems()
         {
-            using (var context = new GalleryEntities())
-            {
-                return context.Comments.Single(predicate);
-            }
-        }
-        //Wondering if should add this func to a helper class -TODO 
-        public static User GetUserByID(Guid userID)
-        {
-            using (var context = new GalleryEntities())
-            {
-                return context.Users.Single(x => x.UserID == userID);
-            }
+            throw new NotImplementedException();
         }
 
-        public void Update(Comment comment)
+        public Comment FindById(Guid id)
         {
-            using (var ctx = new GalleryEntities())
+            throw new NotImplementedException();
+        }
+
+        public static string GetUserName(Guid id)
+        {
+            using (var db = new GalleryEntities())
             {
-                ctx.Entry(comment).State = EntityState.Modified;
-                ctx.SaveChanges();
+                return db.Users.Single(x => x.Id == id).Name;
             }
         }
     }

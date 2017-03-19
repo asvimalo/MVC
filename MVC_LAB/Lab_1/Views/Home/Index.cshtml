@@ -1,33 +1,27 @@
-﻿@model IEnumerable<Lab_1.Models.PhotoViewModel>
+﻿@model Lab_1.Models.GalleryPhotoViewModel
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Home Page";
 }
 
-<h2 class="text-center">Gallery</h2>
+<div class="jumbotron">
+    <h1>Gallery</h1>
+    <p class="lead">Enjoy your Gallery app. Check out our amazing collection. Your comments are welcome  .</p>
+</div>
 
-
-<div class="row">
-
-    @foreach (var item in Model)
-    {
-
-        <div class="col-md-3">
-            @{
-                string _url = Path.GetFileName(item.Path);
-                <img class="img-responsive" src="~/Images/@_url"/>
+<div class="container">
+    <div class="row">
+        <h2>Latest Uploaded</h2>
+        <div class="col-sm-12">
+            @if (Model != null)
+            {
+                <a href="@string.Format($"/Gallery/Details/{Model.Id}")" class="thumbnail">
+                    <h3 class="caption" id="ctr">@Model.Name</h3>
+                    <img src="~/Photos/@Model.FileName" alt="@Model.Name">
+                </a>
             }
-            @*<div class="caption">
-
-                @Html.DisplayFor(modelItem => item.Name)
-                @Html.DisplayFor(modelItem => item.Description)
-                @Html.DisplayFor(modelItem => item.UploadedDate)
-
-            </div>*@
         </div>
-
-      }
+    </div>
 </div>
 
 
